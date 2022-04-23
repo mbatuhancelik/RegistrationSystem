@@ -3,3 +3,7 @@ cmpe321ps/cmpe321ps/__pycache__/*
 cmpe321ps/forum/migrations/*
 cmpe321ps/forum/__pycache__/*
 cmpe321ps/.env
+Scripts/*
+Lib/*
+Include/*
+pyvenv.cfg
