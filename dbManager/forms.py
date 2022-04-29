@@ -32,5 +32,6 @@ class AddInstructorForm(forms.Form):
 class DeleteStudentForm(forms.Form):
     studentId = forms.IntegerField()
 
-class DeleteInstructorForm(forms.Form):
+class UpdateInstructorForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
+    title = forms.CharField(widget=forms.TextInput())

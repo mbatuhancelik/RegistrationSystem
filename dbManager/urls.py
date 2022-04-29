@@ -11,5 +11,5 @@ urlpatterns = [
     path('viewStudents', views.viewStudents, name='viewStudents'),
     path('deleteStudent', views.deleteStudent, name='deleteStudent'),
     path('viewInstructors', views.viewInstructors, name='viewInstructors'),
-    path('deleteInstructor', views.deleteInstructor, name='deleteInstructor')
+    path('updateInstructor', views.updateInstructor, name='updateInstructor')
 ]

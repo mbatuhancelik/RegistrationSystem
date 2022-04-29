@@ -3,7 +3,7 @@
 
 <html lang="en">
 <head>
-  	<title>Home</title>
+  	<title>instructors:</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
@@ -24,7 +24,7 @@
 <body>
     <div class="wrapper">
         <div style="background-color:lavender; !important" class="jumbotron text-center bg-primary">
-            <h2> Students:</h2>
+            <h2> Instructors:</h2>
     </div>
     <div class="row">
 					
@@ -55,13 +55,13 @@
             {% endfor %}
         </table>
         </div>
-        <p>Delete Instructor</p>
+        <p>Update Instructor</p>
         <div class="column" style="float: left;
         width: 20%;">
-            <form class="form-group" method="POST" novalidate action="{% url 'deleteInstructor' %}">
+            <form class="form-group" method="POST" novalidate action="{% url 'updateInstructor' %}">
                 {{form|crispy}}
                 {% csrf_token %}
-                <button type="submit" style="margin-top: 10px;"class="btn btn-success">Delete</button>	
+                <button type="submit" style="margin-top: 10px;"class="btn btn-success">Update</button>	
             </form> 
         </div>
 
