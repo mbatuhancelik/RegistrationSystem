@@ -25,6 +25,12 @@
 						<p>Your username or password is not correct</p>
 					</div>
 				{% endif %}
+				{% if auth_fail%}
+					<div class="alert alert-danger" role="alert">
+						<h4 class="alert-heading">Unauthoried Action</h4>
+						<p>You Are Not allowed to do that!</p>
+					</div>
+				{% endif %}
 				<div class="row">
 					
 					<div class="column" style="float: left;
