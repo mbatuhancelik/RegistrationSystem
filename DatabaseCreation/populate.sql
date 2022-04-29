@@ -1,10 +1,15 @@
+INSERT IGNORE INTO  databasemanager VALUES("kadir",sha2("123",256));
+INSERT IGNORE INTO  databasemanager VALUES("batu",sha2("123",256));
+
+
 INSERT IGNORE INTO  department VALUES("CMPE","cmpe");
-INSERT IGNORE INTO  user VALUES("kadir.","kadir@","123","kadir","sur","CMPE");
-INSERT IGNORE INTO  user VALUES("batu.","b@","123","kadir","sur","CMPE");
-INSERT IGNORE INTO  user VALUES("ali.","kadir@","123","kadir","sur","CMPE");
-INSERT IGNORE INTO  user VALUES("veli.","kadir@","123","kadir","sur","CMPE");
-INSERT IGNORE INTO  user VALUES("salim.","kadir@","123","kadir","sur","CMPE");
-INSERT IGNORE INTO  user VALUES("ece.","kadir@","123","kadir","sur","CMPE");
+
+INSERT IGNORE INTO  user VALUES("kadir.","kadir@",sha2("123",256),"kadir","sur","CMPE");
+INSERT IGNORE INTO  user VALUES("batu.","b@",sha2("123",256),"kadir","sur","CMPE");
+INSERT IGNORE INTO  user VALUES("ali.","kadir@",sha2("123",256),"kadir","sur","CMPE");
+INSERT IGNORE INTO  user VALUES("veli.","kadir@",sha2("123",256),"kadir","sur","CMPE");
+INSERT IGNORE INTO  user VALUES("salim.","kadir@",sha2("123",256),"kadir","sur","CMPE");
+INSERT IGNORE INTO  user VALUES("ece.","kadir@",sha2("123",256),"kadir","sur","CMPE");
 INSERT IGNORE INTO  student(username,student_id)  VALUES("ece.",1);
 INSERT IGNORE INTO  student(username,student_id)  VALUES("salim.",2);
 INSERT IGNORE INTO  student(username,student_id)  VALUES("batu.",3);
