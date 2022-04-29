@@ -10,3 +10,5 @@ pyvenv.cfg
 *.pyc
 .vscode/*
 project_env/*
+.env
+RegistrationSystem/.env
