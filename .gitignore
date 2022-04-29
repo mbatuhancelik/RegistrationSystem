@@ -9,3 +9,4 @@ Include/*
 pyvenv.cfg
 *.pyc
 .vscode/*
+project_env/*
