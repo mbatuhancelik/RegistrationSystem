@@ -7,3 +7,5 @@ Scripts/*
 Lib/*
 Include/*
 pyvenv.cfg
+*.pyc
+.vscode/*

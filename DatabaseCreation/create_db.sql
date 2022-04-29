@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS User (
 -- A user must be instructor or student. Each user entry must be inserted to either instructor or student after its creation.
 	username	VARCHAR(20) not Null,
 	email	VARCHAR(50) not Null,
-	password	VARCHAR(50) not Null,
+	password	VARCHAR(256) not Null,
 	name	VARCHAR(50) not Null,
 	surname	VARCHAR(50) not Null,
     department_id  varchar(50) not Null,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS Enrolled_In (
 CREATE TABLE IF NOT EXISTS DatabaseManager (
 -- There can be at most 4 database managers.
 	username	VARCHAR(50) not Null,
-	password	VARCHAR(50) not Null,
+	password	VARCHAR(256) not Null,
 	PRIMARY KEY(username)
 );
 CREATE TABLE IF NOT EXISTS Prerequisite_Of (
