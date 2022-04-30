@@ -1,0 +1,61 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  	<title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+        form { 
+            margin: 0 auto; 
+            width:250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div style="background-color:lavender; !important" class="jumbotron text-center bg-primary">
+            <h2> Courses: </h2>
+    </div>
+    <div class="row">
+					
+        <div class="column" style=" margin-left: 100px;;;
+        width: 80%;">
+        <div class="column" style="float: left;
+        "> 
+        <table class="center">
+            <colgroup>
+                <col span="1" >
+                <col span="1">
+                <col span="1">
+            </colgroup>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Instructor Surname</th>
+                <th>Department</th>
+                <th>Credits</th>
+                <th>Prerequisites</th>
+            </tr>
+            {% for row in courses %}
+            <tr>
+                {% for value in row %}
+                <td>
+                    {{value}}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

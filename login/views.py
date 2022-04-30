@@ -51,9 +51,10 @@ def studentLogin(req):
     password=req.POST["password"]
 
     result=run_statement(f"SELECT * FROM user WHERE username='{username}' and  password=sha2('{password}',256) and username in (Select username from student);") #Run the query in DB
+    print(result)
     if result: #If a result is retrieved
         req.session["username"] = username
         req.session["type"] = "student"
-        return HttpResponseRedirect('../login') #TODO:Redirect user to home page
+        return HttpResponseRedirect('../student') #TODO:Redirect user to home page
     else:
         return HttpResponseRedirect('../login?fail=true')
