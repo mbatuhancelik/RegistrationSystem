@@ -65,7 +65,37 @@
                 {% csrf_token %}
                 <button type="submit" style="margin-top: 10px;"class="btn btn-success">Delete</button>	
             </form> 
-        </div>
-
+        <p>Get Student</p>
+            <form class="form-group" method="POST" novalidate action="{% url 'getStudent' %}">
+                {{form|crispy}}
+                {% csrf_token %}
+                <button type="submit" style="margin-top: 10px;"class="btn btn-success">Get</button>	
+            </form> 
+        
+        {% if student%}
+        <p>Grades for {{student}}</p>
+        <table class="center">
+            <colgroup>
+                <col span="1" >
+                <col span="1">
+                <col span="1">
+            </colgroup>
+            <tr>
+                <th>Course ID</th>
+                <th>Name</th>
+                <th>Grade</th>
+            </tr>
+            {% for row in grades %}
+            <tr>
+                {% for value in row %}
+                <td>
+                    {{value}}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+		{% endif %}
+    </div>
 </body>
 </html>

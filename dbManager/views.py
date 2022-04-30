@@ -38,13 +38,20 @@ def deleteStudent(req):
     #in successful execution, user and student result returns empty tuple
     return HttpResponseRedirect("./viewStudents")
 
+def getStudent(req):
+    return HttpResponseRedirect(f"./viewStudents?studentId={req.POST['studentId']}")
+
 def viewStudents(req):
     result = run_statement("""
     Select student.student_id, user.username, user.name, surname, email, department_id, completed_credits, gpa from 
     student inner join user on  student.username=user.username order by  completed_credits ASC""")
 
-    delete = forms.DeleteStudentForm()
-    return render(req,'viewStudents.html',{"results":result,"form":delete})
+    student=req.GET.get("studentId")
+    grades = None
+    if student:
+        grades = run_statement(f"select course_id, course_id, grade from grades inner join student on grades.student_id = student.student_id where student.student_id = {student}" )
+    delete = forms.GetStudentForm()
+    return render(req,'viewStudents.html',{"results":result,"form":delete,"student":student,"grades":grades })
 
 def addInstructorForm(req):
     

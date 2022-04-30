@@ -29,7 +29,7 @@ class AddInstructorForm(forms.Form):
     department = forms.CharField(widget=forms.TextInput())
     title= forms.CharField(widget=forms.TextInput())
 
-class DeleteStudentForm(forms.Form):
+class GetStudentForm(forms.Form):
     studentId = forms.IntegerField()
 
 class UpdateInstructorForm(forms.Form):
