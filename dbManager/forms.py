@@ -35,3 +35,5 @@ class GetStudentForm(forms.Form):
 class UpdateInstructorForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
     title = forms.CharField(widget=forms.TextInput())
+class GetInstructorForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput())

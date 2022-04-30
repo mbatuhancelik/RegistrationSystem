@@ -87,3 +87,21 @@ def viewInstructors(req):
 
     update = forms.UpdateInstructorForm()
     return render(req,'viewInstructors.html',{"results":result,"form":update})
+
+def getCoursesOfInstructor(req):
+    return HttpResponseRedirect(f"./viewCoursesOfInstructor?instructor={req.POST['username']}")
+
+def viewCoursesOfInstructor(req):
+
+    instructor=req.GET.get("instructor")
+    result = None
+    if instructor: 
+        result = run_statement(f"""
+        select course_id,  name, l.classroom_id, campus, timeslot from classroom inner join 
+        (select c.course_id,c.name,  location.timeslot, location.classroom_id from location  inner join
+        (select * from course where lecturer = \"{instructor}\") as c on 
+        c.course_id = location.course_id) as l 
+        on l.classroom_id = classroom.classroom_id; """)
+
+    form = forms.GetInstructorForm()
+    return render(req,'coursesOfInstructor.html',{"courses":result,"form":form,"instructor":instructor })

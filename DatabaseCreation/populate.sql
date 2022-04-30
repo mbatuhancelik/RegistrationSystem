@@ -21,9 +21,14 @@ insert ignore into course Values("CMPE321", "database", 4, 100, "kadir.");
 insert ignore into course Values("CMPE350", "oto", 4, 100, "ali.");
 insert ignore into course Values("CMPE220", "oto", 4, 100, "ali.");
 
-insert into prerequisite_of values("CMPE321", "CMPE220");
-insert into enrolled_in values(3, "CMPE321");
+insert ignore into classroom Values("NH101", 150, "North");
 
--- insert ignore into grades Values(3, "CMPE321", 3);
--- insert ignore into grades Values(3, "CMPE350", 4);
--- insert ignore into grades Values(3, "CMPE320", 0);
+insert ignore into location Values("CMPE220", "NH101", 3);
+insert ignore into location Values("CMPE220", "NH101", 4);
+
+-- insert into prerequisite_of values("CMPE321", "CMPE220");
+-- insert into enrolled_in values(3, "CMPE321");
+
+insert ignore into grades Values(3, "CMPE321", 3);
+insert ignore into grades Values(3, "CMPE350", 4);
+insert ignore into grades Values(3, "CMPE320", 0);
