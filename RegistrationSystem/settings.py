@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'login',
     'dbManager',
     'student',
-    'instructor'
+    'instructor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
