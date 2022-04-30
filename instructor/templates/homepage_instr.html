@@ -1,0 +1,45 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  	<title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
+        form { 
+            margin: 0 auto; 
+            width:250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div style="background-color:lavender; !important" class="jumbotron text-center bg-primary">
+            <h2> Welcome back {{username}}.</h2>
+    </div>
+    <div class="d-flex justify-content-around" style="margin-top: 20px"></div>
+        {% if action_fail%}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Filter Failed</h4>
+                <p>Invalid Timeslot, timeslot is from 1 to 10!</p>
+            </div>
+        {% endif %}
+        <div class=row>
+            <form class="form-group" method="POST" novalidate action="{% url 'filterClassrooms' %}">
+                {{form|crispy}}
+                {% csrf_token %}
+                <button type="input" style="margin-top: 10px;"class="btn btn-success">View Available Classrooms</button>	
+            </form> 
+        </div> 
+    </div>>
+</body>
+</html>
