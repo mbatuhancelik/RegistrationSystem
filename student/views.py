@@ -38,4 +38,17 @@ def courses(req):
 
     courseForm = forms.GetCourseForm()
     return render(req,'viewCourses.html',{"courses":courses,"form": courseForm})
-        
+
+def transcript(req):
+
+    takenCourses = list(run_statement(f"""SELECT grades.course_id, name,  grade FROM 
+    grades inner join course on grades.course_id = course.course_id
+    where student_id = {req.session["studentId"]};"""))
+    
+    enrolledCourses = list(run_statement(f"""SELECT course.course_id, name FROM 
+    enrolled_in inner join course on enrolled_in.course_id = course.course_id;
+    where student_id = {req.session["studentId"]};"""))
+
+    enrolledCourses += takenCourses
+
+    return render(req,'transcript.html',{"courses":enrolledCourses})

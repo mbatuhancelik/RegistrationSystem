@@ -206,6 +206,8 @@ BEGIN
     completed_credits = sum_Credits
     where
     student.student_id = new.student_id;
+    
+    delete from enrolled_in where student_id = new.student_id and course_id = new.course_id;
 
 END $$
 
