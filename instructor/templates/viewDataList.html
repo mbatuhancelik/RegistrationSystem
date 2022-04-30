@@ -33,18 +33,23 @@
         <table class="center">
             <colgroup>
                 <col span="1" >
+                <col span="2">
+                <col span="1">
+                <col span="1">
+                <col span="1" >
+                <col span="1">
                 <col span="1">
                 <col span="1">
             </colgroup>
             <tr>
-                <th>Classroom ID</th>
-                <th>Campus</th>
-                <th>Classroom Capacity</th>
+                {% for hd in header_list %}
+                <th> {{hd}} </th>
+                {% endfor %}
             </tr>
             {% for row in results %}
             <tr>
                 {% for value in row %}
-                <td>
+                <td style="width:10%">
                     {{value}}
                 </td>
                 {% endfor %}

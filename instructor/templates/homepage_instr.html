@@ -39,6 +39,18 @@
                 {% csrf_token %}
                 <button type="input" style="margin-top: 10px;"class="btn btn-success">View Available Classrooms</button>	
             </form> 
+            <form class="form-group" method="POST" novalidate action="{% url 'addCourseForm' %}">
+                {% csrf_token %}
+                <button type="input" style="margin-top: 10px;"class="btn btn-success">Add Course</button>	
+            </form>
+            <form class="form-group" method="POST" novalidate action="{% url 'addPreqForm' %}">
+                {% csrf_token %}
+                <button type="input" style="margin-top: 10px;"class="btn btn-success">Add Prerequisite</button>	
+            </form> 
+            <form class="form-group" method="POST" novalidate action="{% url 'viewCourses' %}">
+                {% csrf_token %}
+                <button type="input" style="margin-top: 10px;"class="btn btn-success">View Courses</button>	
+            </form>
         </div> 
     </div>>
 </body>
