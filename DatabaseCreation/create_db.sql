@@ -233,4 +233,24 @@ where
       SET MESSAGE_TEXT = 'You can not take this course due to prerequisite restrictions!', MYSQL_ERRNO = 005;
     END IF; 
 END $$
+
+CREATE TRIGGER enrolled_Insert_retake
+AFTER INSERT
+ON enrolled_in FOR EACH ROW
+BEGIN
+declare retake int;
+
+select count(*)
+into retake
+from
+	grades
+where 
+	grades.student_id = new.student_id and
+    grades.course_id =  new.course_id;
+    
+     IF retake > 0 THEN
+		SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'You can not take a course twice', MYSQL_ERRNO = 005;
+    END IF; 
+END $$
 DELIMITER ;

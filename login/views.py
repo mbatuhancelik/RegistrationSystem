@@ -55,6 +55,8 @@ def studentLogin(req):
     if result: #If a result is retrieved
         req.session["username"] = username
         req.session["type"] = "student"
+        req.session["studentId"] = run_statement(f"SELECT student_id FROM student WHERE username='{username}';")[0][0]
+
         return HttpResponseRedirect('../student') #TODO:Redirect user to home page
     else:
         return HttpResponseRedirect('../login?fail=true')

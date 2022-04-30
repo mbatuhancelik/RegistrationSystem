@@ -1,13 +1,22 @@
 from django.http import HttpResponseRedirect
 from runSQL import run_statement
 from django.shortcuts import render
-
+from . import forms
 # Create your views here.
 def index(req):
     if req.session["type"] != "student":
         req.session.flush()
         return HttpResponseRedirect('../login?unAuth=False')
     return render(req,'studentHomepage.html')
+
+def enrollCourse(req):
+    
+    run_statement(f"""
+    insert into enrolled_in values({req.session['studentId']}, "{req.POST['courseId']}");
+    """)
+
+    return HttpResponseRedirect("./courses")
+
 
 def courses(req):
     courses = list(run_statement("""select course_id, cl.name, surname, department_id, credits from user inner join 
@@ -26,5 +35,7 @@ def courses(req):
             courses[i].append(preqs_string[:-1])
             courses[i] = tuple(courses[i])
     courses = tuple(courses)
-    return render(req,'viewCourses.html',{"courses":courses})
+
+    courseForm = forms.GetCourseForm()
+    return render(req,'viewCourses.html',{"courses":courses,"form": courseForm})
         
