@@ -119,7 +119,6 @@ def viewGradeAverage(req):
         select c.course_id, name, avg   from course inner join (select course_id, avg(grade) as avg from grades 
         where course_id = \"{course}\") as c 
         on c.course_id = course.course_id; """)
-    print(result)
 
     form = forms.GetCourseForm()
     return render(req,'gradeAverage.html',{"result":result,"form":form })
