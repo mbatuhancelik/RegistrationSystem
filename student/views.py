@@ -17,11 +17,17 @@ def enrollCourse(req):
 
     return HttpResponseRedirect("./courses")
 
+def searchCourse(req):
+    return HttpResponseRedirect(f"./courses?search={req.POST['keyword']}")
 
 def courses(req):
-    courses = list(run_statement("""select course_id, cl.name, surname, department_id, credits from user inner join 
+    query = """select course_id, cl.name, surname, department_id, credits from user inner join 
                     (select * from course inner join instructor on course.lecturer = instructor.username) as cl
-                    on user.username = cl.username"""))
+                    on user.username = cl.username"""
+
+    if req.GET.get("search"):
+        query += f"  where cl.name LIKE '%{req.GET.get('search')}%'"
+    courses = list(run_statement(query))
     if len(courses) != 0:
         for i in range(len(courses)):
             courses[i] = list(courses[i])
@@ -37,7 +43,7 @@ def courses(req):
     courses = tuple(courses)
 
     courseForm = forms.GetCourseForm()
-    return render(req,'viewCourses.html',{"courses":courses,"form": courseForm})
+    return render(req,'viewCourses.html',{"courses":courses,"form": courseForm,"searchForm":forms.SearchCourseForm()})
 
 def transcript(req):
 
