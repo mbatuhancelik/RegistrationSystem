@@ -37,3 +37,6 @@ class UpdateInstructorForm(forms.Form):
     title = forms.CharField(widget=forms.TextInput())
 class GetInstructorForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
+
+class GetCourseForm(forms.Form):
+    courseId = forms.CharField(widget=forms.TextInput())

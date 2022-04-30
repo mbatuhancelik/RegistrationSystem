@@ -14,5 +14,7 @@ urlpatterns = [
     path('viewInstructors', views.viewInstructors, name='viewInstructors'),
     path('updateInstructor', views.updateInstructor, name='updateInstructor'),
     path('viewCoursesOfInstructor', views.viewCoursesOfInstructor, name='viewCoursesOfInstructor'),
-    path('getCoursesOfInstructor', views.getCoursesOfInstructor , name='getCoursesOfInstructor')
+    path('getCoursesOfInstructor', views.getCoursesOfInstructor , name='getCoursesOfInstructor'),
+    path('viewGradeAverage', views.viewGradeAverage, name='viewGradeAverage'),
+    path('getGradeAverage', views.getGradeAverage , name='getGradeAverage')
 ]

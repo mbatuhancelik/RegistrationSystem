@@ -105,3 +105,21 @@ def viewCoursesOfInstructor(req):
 
     form = forms.GetInstructorForm()
     return render(req,'coursesOfInstructor.html',{"courses":result,"form":form,"instructor":instructor })
+
+
+def getGradeAverage(req):
+    return HttpResponseRedirect(f"./viewGradeAverage?courseId={req.POST['courseId']}")
+
+def viewGradeAverage(req):
+
+    course=req.GET.get("courseId")
+    result = None
+    if course: 
+        result = run_statement(f"""
+        select c.course_id, name, avg   from course inner join (select course_id, avg(grade) as avg from grades 
+        where course_id = \"{course}\") as c 
+        on c.course_id = course.course_id; """)
+    print(result)
+
+    form = forms.GetCourseForm()
+    return render(req,'gradeAverage.html',{"result":result,"form":form })

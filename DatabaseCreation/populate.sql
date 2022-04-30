@@ -24,7 +24,7 @@ insert ignore into course Values("CMPE220", "oto", 4, 100, "ali.");
 insert ignore into classroom Values("NH101", 150, "North");
 
 insert ignore into location Values("CMPE220", "NH101", 3);
-insert ignore into location Values("CMPE220", "NH101", 4);
+insert ignore into location Values("CMPE350", "NH101", 4);
 
 -- insert into prerequisite_of values("CMPE321", "CMPE220");
 -- insert into enrolled_in values(3, "CMPE321");
