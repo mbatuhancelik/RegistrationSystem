@@ -11,4 +11,8 @@ urlpatterns = [
     path('addPreq', views.addPreq, name='addPreq'),
     path('addPreqForm', views.addPreqForm, name='addPreqForm'),
     path('viewCourses', views.viewCourses, name='viewCourses'),
+    path('viewStudentsForCourse', views.viewStudentsForCourse, name='viewStudentsForCourse'),
+    path('viewStudentsForm', views.viewStudentsForm, name='viewStudentsForm'),
+    path('updateCourseName', views.updateCourseName, name='updateCourseName'),
+    path('addGrade', views.addGrade, name='addGrade'),
 ]
