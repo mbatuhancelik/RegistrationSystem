@@ -12,15 +12,13 @@ connection = mysql.connector.connect(
   database=env("MYSQL_DATABASE"),
   auth_plugin='mysql_native_password'
 )
-
-## THIS DOES NOT WORK
 cursor= connection.cursor()
 
-creation_script_file =  open("DatabaseCreation\\create_db.sql", "r")
-creation_script = creation_script_file.read()
+creation_script_file =  open("DatabaseCreation\\create_tables.sql", "r")
+creation_script = creation_script_file.read().split(';')
 creation_script_file.close()
-
-cursor.execute(creation_script, multi=True)
+for sta in creation_script:
+  cursor.execute(sta)
 
 connection.commit()
     
