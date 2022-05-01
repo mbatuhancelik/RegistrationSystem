@@ -57,15 +57,23 @@
     </div>
     <div class="column" style="float: left;
         width: 15%;">
+        <p>Enroll to a course</p>
             <form class="form-group" method="POST" novalidate action="{% url 'enrollCourse' %}">
                 {{form|crispy}}
                 {% csrf_token %}
                 <button type="submit" style="margin-top: 10px;"class="btn btn-success">Enroll</button>	
             </form> 
+            <p> Search a course</p>
             <form class="form-group" method="POST" novalidate action="{% url 'searchCourse' %}">
                 {{searchForm|crispy}}
                 {% csrf_token %}
                 <button type="submit" style="margin-top: 10px;"class="btn btn-success">Search</button>	
+            </form> 
+            <p>Filter Courses</p>
+            <form class="form-group" method="POST" novalidate action="{% url 'filterCourses' %}">
+                {{filterForm|crispy}}
+                {% csrf_token %}
+                <button type="submit" style="margin-top: 10px;"class="btn btn-success">Filter</button>	
             </form> 
     </div>
 </body>

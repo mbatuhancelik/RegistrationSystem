@@ -255,4 +255,14 @@ where
       SET MESSAGE_TEXT = 'You can not take a course twice', MYSQL_ERRNO = 005;
     END IF; 
 END $$
+
+CREATE PROCEDURE `filterCourses` (IN department varchar(20), IN min_credits int, IN max_credits int)
+BEGIN
+	Select * from course where
+    course_id LIKE CONCAT('%', department ,'%') and
+    credits <= max_credits and
+    credits >= min_credits;
+END $$
+
+
 DELIMITER ;

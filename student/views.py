@@ -20,14 +20,13 @@ def enrollCourse(req):
 def searchCourse(req):
     return HttpResponseRedirect(f"./courses?search={req.POST['keyword']}")
 
-def courses(req):
-    query = """select course_id, cl.name, surname, department_id, credits from user inner join 
-                    (select * from course inner join instructor on course.lecturer = instructor.username) as cl
-                    on user.username = cl.username"""
-
-    if req.GET.get("search"):
-        query += f"  where cl.name LIKE '%{req.GET.get('search')}%'"
-    courses = list(run_statement(query))
+def coursesPage(req ,courses):
+    return render(req,'viewCourses.html',{"courses":courses,
+                                            "form": forms.GetCourseForm(),
+                                            "searchForm":forms.SearchCourseForm(),
+                                            "filterForm": forms.FilterCourseForm()
+                                            }) 
+def appendPrerequisites(courses):
     if len(courses) != 0:
         for i in range(len(courses)):
             courses[i] = list(courses[i])
@@ -40,10 +39,19 @@ def courses(req):
             
             courses[i].append(preqs_string[:-1])
             courses[i] = tuple(courses[i])
-    courses = tuple(courses)
+    return tuple(courses)
 
-    courseForm = forms.GetCourseForm()
-    return render(req,'viewCourses.html',{"courses":courses,"form": courseForm,"searchForm":forms.SearchCourseForm()})
+def listCourses(req):
+    query = """select course_id, cl.name, surname, department_id, credits from user inner join 
+                    (select * from course inner join instructor on course.lecturer = instructor.username) as cl
+                    on user.username = cl.username"""
+
+    if req.GET.get("search"):
+        query += f"  where cl.name LIKE '%{req.GET.get('search')}%'"
+    courses = appendPrerequisites( list(run_statement(query)) )    
+
+    return coursesPage(req, courses)
+
 
 def transcript(req):
 
@@ -58,3 +66,22 @@ def transcript(req):
     enrolledCourses += takenCourses
 
     return render(req,'transcript.html',{"courses":enrolledCourses})
+
+def filterCourses(req):
+    department = req.POST['department']
+    minCredits = req.POST['minCredits']
+    maxCredits = req.POST['maxCredits']
+
+    if not minCredits:
+        minCredits = run_statement("select min(credits) from course;")[0][0]
+    if not maxCredits:
+        maxCredits = run_statement("select max(credits) from course;")[0][0]
+    if not department:
+        department = ''
+
+    result = run_statement(f"call filterCourses('{department}', {minCredits}, {maxCredits});select min(credits) from course;")
+    courses = appendPrerequisites( list(result))
+
+    return coursesPage(req, courses)
+
+

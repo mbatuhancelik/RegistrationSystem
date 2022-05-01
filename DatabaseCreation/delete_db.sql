@@ -1,3 +1,4 @@
+Drop Procedure IF EXISTS filterCourses;
 DROP TRIGGER  IF EXISTS enrolled_Insert_retake;
 DROP TRIGGER  IF EXISTS databasemanager_Insert;
 DROP TRIGGER  IF EXISTS instructor_Insert;

@@ -29,7 +29,7 @@ insert ignore into location Values("CMPE350", "NH101", 4);
 insert into prerequisite_of values("CMPE321", "CMPE220");
 insert into enrolled_in values(3, "CMPE321");
 
-insert ignore into grades Values(3, "CMPE321", 3);
+insert ignore into grades Values(3, "CMPE220", 3);
 insert ignore into grades Values(2, "CMPE350", 3);
 insert ignore into grades Values(3, "CMPE350", 4);
 insert ignore into grades Values(3, "CMPE320", 0);
