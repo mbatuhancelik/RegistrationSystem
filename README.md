@@ -16,7 +16,7 @@ MYSQL_ROOT_PASSWORD=<YOUR_PASSWORD>
 MYSQL_PASSWORD=<YOUR_PASSWORD>
 MYSQL_HOST="localhost"
 ```
-
+Then create the database by running ./RegistrationSystem/create_db.py
 After that, ensure that your database server is up and run these commands to set up the database to Django configurations:
 ```
 python manage.py makemigrations
