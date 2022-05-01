@@ -27,7 +27,18 @@ insert ignore into location Values("CMPE220", "NH101", 3);
 insert ignore into location Values("CMPE350", "NH101", 4);
 
 insert into prerequisite_of values("CMPE321", "CMPE220");
-insert into enrolled_in values(3, "CMPE321");
+-- insert into enrolled_in values(3, "CMPE321");
+
+INSERT IGNORE INTO  classroom VALUES("BMA1",120,"North Campus");
+INSERT IGNORE INTO  classroom VALUES("BMA2",140,"North Campus");
+INSERT IGNORE INTO  classroom VALUES("BMA3",140,"North Campus");
+INSERT IGNORE INTO  classroom VALUES("BMA4",140,"North Campus");
+INSERT IGNORE INTO  classroom VALUES("BMA5",140,"North Campus");
+INSERT IGNORE INTO  classroom VALUES("BMA6",140,"North Campus");
+INSERT IGNORE INTO  classroom VALUES("BMA7",140,"North Campus");
+INSERT IGNORE INTO  location VALUES("CMPE220","BMA1",1);
+INSERT IGNORE INTO  location VALUES("CMPE321","BMA2",4);
+INSERT IGNORE INTO  location VALUES("CMPE350","BMA3",9);
 
 insert ignore into grades Values(3, "CMPE220", 3);
 insert ignore into grades Values(2, "CMPE350", 3);

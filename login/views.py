@@ -41,7 +41,7 @@ def lecturerLogin(req):
     if result: #If a result is retrieved
         req.session["username"] = username
         req.session["type"] = "instructor"
-        return HttpResponseRedirect('../login') #TODO:Redirect user to home page
+        return HttpResponseRedirect('../instructor') #TODO:Redirect user to home page
     else:
         return HttpResponseRedirect('../login?fail=true')
 
