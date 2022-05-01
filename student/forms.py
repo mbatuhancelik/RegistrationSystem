@@ -9,5 +9,6 @@ class SearchCourseForm(forms.Form):
 
 class FilterCourseForm(forms.Form):
     department = forms.CharField(widget=forms.TextInput() , required=False)
+    campus = forms.CharField(widget=forms.TextInput() , required=False)
     minCredits = forms.IntegerField(required=False)
     maxCredits = forms.IntegerField(required=False)

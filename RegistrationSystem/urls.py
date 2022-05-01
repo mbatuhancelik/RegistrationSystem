@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', include('login.urls')),
     path('dbManager/', include('dbManager.urls')),
-    path('instructor/', include('dbManager.urls')),
     path('student/', include('student.urls')),
     path('',lambda req : redirect('login/')),
     path('instructor/', include('instructor.urls')),

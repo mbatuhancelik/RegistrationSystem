@@ -154,10 +154,12 @@ BEGIN
     SELECT quota
     INTO location_quota
     FROM course WHERE course.course_id =  new.course_id;
-    
+    IF location_capacity < location_quota THEN
+		Delete from course where course_id = new.course_id;
+    END IF; 
     IF location_capacity < location_quota THEN
 		SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Classroom capacity is not sufficient for this course.', MYSQL_ERRNO = 004;
+		SET MESSAGE_TEXT = 'Classroom capacity is not sufficient for this course.', MYSQL_ERRNO = 004;
     END IF; 
 
 END $$
@@ -256,12 +258,23 @@ where
     END IF; 
 END $$
 
-CREATE PROCEDURE `filterCourses` (IN department varchar(20), IN min_credits int, IN max_credits int)
+CREATE PROCEDURE `filterCourses` (IN departmentIn varchar(20),IN campusIn varchar(20), IN min_credits int, IN max_credits int)
 BEGIN
-	Select * from course where
-    course_id LIKE CONCAT('%', department ,'%') and
+select c.course_id, name, surname, department_id, credits, l.campus from 
+( select location.course_id, classroom.campus from location inner join classroom
+on location.classroom_id = classroom.classroom_id
+where
+    classroom.campus LIKE CONCAT('%', campusIn ,'%')
+) as l
+inner join
+(
+Select course.course_id, course.name, user.surname, department_id, credits from course inner join user on course.lecturer = user.username
+where
+    department_id LIKE CONCAT('%', departmentIn ,'%') and
     credits <= max_credits and
-    credits >= min_credits;
+    credits >= min_credits
+) as c
+on c.course_id = l.course_id;
 END $$
 
 

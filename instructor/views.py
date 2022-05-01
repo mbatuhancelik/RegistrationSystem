@@ -29,7 +29,6 @@ def index(req):
 def viewClassrooms(req):
 
     ts = req.GET.get('timeslot')
-
     # Select Available Classrooms for the given timeslot 
     result = run_statement(f"""
     SELECT classroom.classroom_id, classroom.campus, classroom.capacity 
@@ -82,8 +81,18 @@ def addCourse(req):
 
     lecturer = f"\"{req.session['username']}\""
     # Add course with given parameters
-    course_result = run_statement(f"INSERT INTO course VALUES({data['courseID']},{data['name']},{data['credits']},{data['quota']},{lecturer});")
-    location_result = run_statement(f"INSERT INTO location VALUES({data['courseID']},{data['classroomID']},{data['timeslot']});")
+
+    #TODO: maybe add errors?
+    result = run_statement(f"""
+    START TRANSACTION;
+    INSERT INTO course VALUES({data['courseID']},{data['name']},{data['credits']},{data['quota']},{lecturer});
+    INSERT INTO location VALUES({data['courseID']},{data['classroomID']},{data['timeslot']});
+    COMMIT;
+    """)
+
+    print(result)
+    # course_result = run_statement(f"INSERT INTO course VALUES({data['courseID']},{data['name']},{data['credits']},{data['quota']},{lecturer});")
+    # location_result = run_statement(f"INSERT INTO location VALUES({data['courseID']},{data['classroomID']},{data['timeslot']});")
     
     return HttpResponseRedirect("./addCourseForm")
 
@@ -128,7 +137,7 @@ def viewCourses(req):
     """)
 
     course_headers = ["CourseID", "Course Name", "ClassroomID", "Timeslot", "Quota", "Prerequisite List"]
-    return render(req,'viewDataList.html',{"results":result, "header_list":course_headers, "gotForm":False})
+    return render(req,'viewDataList.html',{"results":result, "header_list":course_headers, "gotForm":False,"title":"View your courses"})
 
 def viewStudentsForCourse(req):
     # TODO: ADD GRADE FUNCTION IS WORKING BUT NOT ABLE TO SHOW GRADES ON TABLE
@@ -136,13 +145,13 @@ def viewStudentsForCourse(req):
     course = req.GET.get('course')
     # Select students of given course 
     result = run_statement(f"""
-        SELECT user.username, student.student_id, user.email, user.name, user.surname, "-" as grade FROM
+        SELECT user.username, student.student_id, user.email, user.name, user.surname FROM
         user INNER JOIN student
         ON user.username=student.username 
         WHERE student.student_id IN (SELECT student_id FROM enrolled_in WHERE course_id = '{course}');
     """)
 
-    student_headers = ["Username", "studentID", "email", "Name", "Surname", "Grade"]
+    student_headers = ["Username", "studentID", "email", "Name", "Surname"]
     title = f"Students Of {course}"
     addGradeForm = forms.addGradeForm
     return render(req,'viewDataList.html',{"results":result, "header_list":student_headers, "title": title, "gotForm":True, "addGradeForm":addGradeForm})

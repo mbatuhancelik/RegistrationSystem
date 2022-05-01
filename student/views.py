@@ -69,6 +69,7 @@ def transcript(req):
 
 def filterCourses(req):
     department = req.POST['department']
+    campus = req.POST['campus']
     minCredits = req.POST['minCredits']
     maxCredits = req.POST['maxCredits']
 
@@ -78,10 +79,16 @@ def filterCourses(req):
         maxCredits = run_statement("select max(credits) from course;")[0][0]
     if not department:
         department = ''
+    if not campus:
+        campus = ''
 
-    result = run_statement(f"call filterCourses('{department}', {minCredits}, {maxCredits});select min(credits) from course;")
+    result = run_statement(f"call filterCourses('{department}','{campus}' ,{minCredits}, {maxCredits});")
     courses = appendPrerequisites( list(result))
 
-    return coursesPage(req, courses)
+    return render(req,'filterCourses.html',{"courses":courses,
+                                            "form": forms.GetCourseForm(),
+                                            "searchForm":forms.SearchCourseForm(),
+                                            "filterForm": forms.FilterCourseForm()
+                                            }) 
 
 
